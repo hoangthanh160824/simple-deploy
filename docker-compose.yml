@@ -1,0 +1,9 @@
+name: simple-deploy
+
+services:
+  app:
+    build: .
+    container_name: simple-deploy
+    ports:
+      - "80:80"
+    restart: unless-stopped
