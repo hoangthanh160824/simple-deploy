@@ -12,14 +12,14 @@ services:
       - traefik.enable=true
       - traefik.docker.network=traefik-public
       - traefik.constraint-label=traefik-public
-      - traefik.http.services.${STACK_NAME?Variable not set}-app.loadbalancer.server.port=80
-      - traefik.http.routers.${STACK_NAME?Variable not set}-app-http.rule=Host(`${DOMAIN?Variable not set}`) || Host(`www.${DOMAIN?Variable not set}`)
-      - traefik.http.routers.${STACK_NAME?Variable not set}-app-http.entrypoints=http
-      - traefik.http.routers.${STACK_NAME?Variable not set}-app-https.rule=Host(`${DOMAIN?Variable not set}`) || Host(`www.${DOMAIN?Variable not set}`)
-      - traefik.http.routers.${STACK_NAME?Variable not set}-app-https.entrypoints=https
-      - traefik.http.routers.${STACK_NAME?Variable not set}-app-https.tls=true
-      - traefik.http.routers.${STACK_NAME?Variable not set}-app-https.tls.certresolver=le
-      - traefik.http.routers.${STACK_NAME?Variable not set}-app-http.middlewares=https-redirect
+      - traefik.http.services.${STACK_NAME?Variable not set}.loadbalancer.server.port=80
+      - traefik.http.routers.${STACK_NAME?Variable not set}-http.rule=Host(`${DOMAIN?Variable not set}`) || Host(`www.${DOMAIN?Variable not set}`)
+      - traefik.http.routers.${STACK_NAME?Variable not set}-http.entrypoints=http
+      - traefik.http.routers.${STACK_NAME?Variable not set}-https.rule=Host(`${DOMAIN?Variable not set}`) || Host(`www.${DOMAIN?Variable not set}`)
+      - traefik.http.routers.${STACK_NAME?Variable not set}-https.entrypoints=https
+      - traefik.http.routers.${STACK_NAME?Variable not set}-https.tls=true
+      - traefik.http.routers.${STACK_NAME?Variable not set}-https.tls.certresolver=le
+      - traefik.http.routers.${STACK_NAME?Variable not set}-http.middlewares=https-redirect
     environment:
       - STACK_NAME=${STACK_NAME}
       - DOMAIN=${DOMAIN}
