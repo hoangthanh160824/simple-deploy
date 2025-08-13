@@ -1,0 +1,25 @@
+name: Deploy to DigitalOcean VPS
+
+on:
+  push:
+    branches:
+      - main
+      - feature/traefik-https
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+
+    env:
+      STACK_NAME: ${{ secrets.STACK_NAME }}
+      DOMAIN: ${{ secrets.DOMAIN }}
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Build Docker images
+      run: docker compose -f docker-compose.yml build
+      
+    - name: Deploy with Docker Compose
+      run: docker compose -f docker-compose.yml up -d
